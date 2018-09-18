@@ -44,4 +44,16 @@ public interface NaturalNumber extends Function<Function<Object, Object>, Functi
 	default NaturalNumber add(NaturalNumber other) {
 		return f -> x -> other.apply(f).apply(this.apply(f).apply(x));
 	}
+	
+	default NaturalNumber subtract(NaturalNumber other) {
+		return (NaturalNumber) other.apply(n -> ((NaturalNumber) n).dec()).apply(this);
+	}
+	
+	default NaturalNumber multiply(NaturalNumber other) {
+		return (NaturalNumber) other.apply(n -> ((NaturalNumber) n).add(this)).apply(ZERO);
+	}
+	
+	default NaturalNumber exp(NaturalNumber exponent) {
+		return (NaturalNumber) exponent.apply(n -> ((NaturalNumber) n).multiply(this)).apply(ZERO.inc());
+	}
 }
