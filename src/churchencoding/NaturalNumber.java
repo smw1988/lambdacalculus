@@ -56,4 +56,28 @@ public interface NaturalNumber extends Function<Function<Object, Object>, Functi
 	default NaturalNumber exp(NaturalNumber exponent) {
 		return (NaturalNumber) exponent.apply(n -> ((NaturalNumber) n).multiply(this)).apply(ZERO.inc());
 	}
+	
+	default Bool le(NaturalNumber other) {
+		return this.subtract(other).isZero();
+	}
+	
+	default Bool ge(NaturalNumber other) {
+		return other.subtract(this).isZero();
+	}
+	
+	default Bool eq(NaturalNumber other) {
+		return this.le(other).and(this.ge(other));
+	}
+	
+	default Bool gt(NaturalNumber other) {
+		return this.le(other).not();
+	}
+	
+	default Bool lt(NaturalNumber other) {
+		return this.ge(other).not();
+	}
+	
+	default Bool ne(NaturalNumber other) {
+		return this.eq(other).not();
+	}
 }

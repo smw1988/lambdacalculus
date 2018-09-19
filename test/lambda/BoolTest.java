@@ -64,7 +64,7 @@ class BoolTest {
 		return b1.xor(b2);
 	}
 	
-	private void testBoolValue(boolean expected, Bool bool) {
+	static void testBoolValue(boolean expected, Bool bool) {
 		Assertions.assertEquals(expected, ChurchObjectConverter.toBoolean(bool));
 	}
 

@@ -83,6 +83,72 @@ class NaturalNumberTest {
 		assertIntValue(0, NaturalNumber.ZERO.exp(ChurchObjectConverter.fromInt(3)));
 		assertIntValue(1, NaturalNumber.ZERO.exp(NaturalNumber.ZERO));
 	}
+	
+	@Test
+	void testLessThanOrEqual() {
+		BoolTest.testBoolValue(true, NaturalNumber.ZERO.le(ChurchObjectConverter.fromInt(1)));
+		BoolTest.testBoolValue(true, NaturalNumber.ZERO.le(ChurchObjectConverter.fromInt(2)));
+		BoolTest.testBoolValue(true, NaturalNumber.ZERO.le(NaturalNumber.ZERO));
+		BoolTest.testBoolValue(true, ChurchObjectConverter.fromInt(2).le(ChurchObjectConverter.fromInt(2)));
+		BoolTest.testBoolValue(true, ChurchObjectConverter.fromInt(2).le(ChurchObjectConverter.fromInt(3)));
+		BoolTest.testBoolValue(false, ChurchObjectConverter.fromInt(2).le(ChurchObjectConverter.fromInt(1)));
+		BoolTest.testBoolValue(false, ChurchObjectConverter.fromInt(1).le(NaturalNumber.ZERO));
+	}
+	
+	@Test
+	void testGreaterThanOrEqual() {
+		BoolTest.testBoolValue(false, NaturalNumber.ZERO.ge(ChurchObjectConverter.fromInt(1)));
+		BoolTest.testBoolValue(false, NaturalNumber.ZERO.ge(ChurchObjectConverter.fromInt(2)));
+		BoolTest.testBoolValue(true, NaturalNumber.ZERO.ge(NaturalNumber.ZERO));
+		BoolTest.testBoolValue(true, ChurchObjectConverter.fromInt(2).ge(ChurchObjectConverter.fromInt(2)));
+		BoolTest.testBoolValue(false, ChurchObjectConverter.fromInt(2).ge(ChurchObjectConverter.fromInt(3)));
+		BoolTest.testBoolValue(true, ChurchObjectConverter.fromInt(2).ge(ChurchObjectConverter.fromInt(1)));
+		BoolTest.testBoolValue(true, ChurchObjectConverter.fromInt(1).ge(NaturalNumber.ZERO));
+	}
+	
+	@Test
+	void testEquality() {
+		BoolTest.testBoolValue(false, NaturalNumber.ZERO.eq(ChurchObjectConverter.fromInt(1)));
+		BoolTest.testBoolValue(false, NaturalNumber.ZERO.eq(ChurchObjectConverter.fromInt(2)));
+		BoolTest.testBoolValue(true, NaturalNumber.ZERO.eq(NaturalNumber.ZERO));
+		BoolTest.testBoolValue(true, ChurchObjectConverter.fromInt(2).eq(ChurchObjectConverter.fromInt(2)));
+		BoolTest.testBoolValue(false, ChurchObjectConverter.fromInt(2).eq(ChurchObjectConverter.fromInt(3)));
+		BoolTest.testBoolValue(false, ChurchObjectConverter.fromInt(2).eq(ChurchObjectConverter.fromInt(1)));
+		BoolTest.testBoolValue(false, ChurchObjectConverter.fromInt(1).eq(NaturalNumber.ZERO));
+	}
+	
+	@Test
+	void testGreaterThan() {
+		BoolTest.testBoolValue(false, NaturalNumber.ZERO.gt(ChurchObjectConverter.fromInt(1)));
+		BoolTest.testBoolValue(false, NaturalNumber.ZERO.gt(ChurchObjectConverter.fromInt(2)));
+		BoolTest.testBoolValue(false, NaturalNumber.ZERO.gt(NaturalNumber.ZERO));
+		BoolTest.testBoolValue(false, ChurchObjectConverter.fromInt(2).gt(ChurchObjectConverter.fromInt(2)));
+		BoolTest.testBoolValue(false, ChurchObjectConverter.fromInt(2).gt(ChurchObjectConverter.fromInt(3)));
+		BoolTest.testBoolValue(true, ChurchObjectConverter.fromInt(2).gt(ChurchObjectConverter.fromInt(1)));
+		BoolTest.testBoolValue(true, ChurchObjectConverter.fromInt(1).gt(NaturalNumber.ZERO));
+	}
+	
+	@Test
+	void testLessThan() {
+		BoolTest.testBoolValue(true, NaturalNumber.ZERO.lt(ChurchObjectConverter.fromInt(1)));
+		BoolTest.testBoolValue(true, NaturalNumber.ZERO.lt(ChurchObjectConverter.fromInt(2)));
+		BoolTest.testBoolValue(false, NaturalNumber.ZERO.lt(NaturalNumber.ZERO));
+		BoolTest.testBoolValue(false, ChurchObjectConverter.fromInt(2).lt(ChurchObjectConverter.fromInt(2)));
+		BoolTest.testBoolValue(true, ChurchObjectConverter.fromInt(2).lt(ChurchObjectConverter.fromInt(3)));
+		BoolTest.testBoolValue(false, ChurchObjectConverter.fromInt(2).lt(ChurchObjectConverter.fromInt(1)));
+		BoolTest.testBoolValue(false, ChurchObjectConverter.fromInt(1).lt(NaturalNumber.ZERO));
+	}
+	
+	@Test
+	void testNonEquality() {
+		BoolTest.testBoolValue(true, NaturalNumber.ZERO.ne(ChurchObjectConverter.fromInt(1)));
+		BoolTest.testBoolValue(true, NaturalNumber.ZERO.ne(ChurchObjectConverter.fromInt(2)));
+		BoolTest.testBoolValue(false, NaturalNumber.ZERO.ne(NaturalNumber.ZERO));
+		BoolTest.testBoolValue(false, ChurchObjectConverter.fromInt(2).ne(ChurchObjectConverter.fromInt(2)));
+		BoolTest.testBoolValue(true, ChurchObjectConverter.fromInt(2).ne(ChurchObjectConverter.fromInt(3)));
+		BoolTest.testBoolValue(true, ChurchObjectConverter.fromInt(2).ne(ChurchObjectConverter.fromInt(1)));
+		BoolTest.testBoolValue(true, ChurchObjectConverter.fromInt(1).ne(NaturalNumber.ZERO));
+	}
 
 	private void assertIntValue(int expected, NaturalNumber n) {
 		Assertions.assertEquals(expected, ChurchObjectConverter.toInt(n));
