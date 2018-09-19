@@ -73,6 +73,17 @@ class NaturalNumberTest {
 	}
 	
 	@Test
+	void testDivision() {
+		assertIntValue(0, NaturalNumber.ZERO.divide(ChurchObjectConverter.fromInt(2)));
+		assertIntValue(1, ChurchObjectConverter.fromInt(1).divide(ChurchObjectConverter.fromInt(1)));
+		assertIntValue(1, ChurchObjectConverter.fromInt(2).divide(ChurchObjectConverter.fromInt(2)));
+		assertIntValue(3, ChurchObjectConverter.fromInt(3).divide(ChurchObjectConverter.fromInt(1)));
+		assertIntValue(1, ChurchObjectConverter.fromInt(3).divide(ChurchObjectConverter.fromInt(2)));
+		assertIntValue(3, ChurchObjectConverter.fromInt(7).divide(ChurchObjectConverter.fromInt(2)));
+		Assertions.assertThrows(ArithmeticException.class, () -> ChurchObjectConverter.fromInt(1).divide(NaturalNumber.ZERO));
+	}
+	
+	@Test
 	void testPower() {
 		assertIntValue(1, ChurchObjectConverter.fromInt(2).exp(NaturalNumber.ZERO));
 		assertIntValue(2, ChurchObjectConverter.fromInt(2).exp(ChurchObjectConverter.fromInt(1)));

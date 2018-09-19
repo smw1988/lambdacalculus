@@ -53,6 +53,14 @@ public interface NaturalNumber extends Function<Function<Object, Object>, Functi
 		return (NaturalNumber) other.apply(n -> ((NaturalNumber) n).add(this)).apply(ZERO);
 	}
 	
+	default NaturalNumber divide(NaturalNumber other) {
+		return ComputeFlow.ifThenElse(other.isZero(), 
+				__ -> { throw new ArithmeticException(); }, 
+				__ -> ComputeFlow.ifThenElse(this.ge(other), 
+						___ -> this.subtract(other).divide(other).inc(), 
+						___ -> NaturalNumber.ZERO));
+	}
+	
 	default NaturalNumber exp(NaturalNumber exponent) {
 		return (NaturalNumber) exponent.apply(n -> ((NaturalNumber) n).multiply(this)).apply(ZERO.inc());
 	}
