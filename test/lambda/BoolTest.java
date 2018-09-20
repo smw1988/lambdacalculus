@@ -11,41 +11,41 @@ class BoolTest {
 
 	@Test
 	void testConversion() {
-		testBoolValue(true, Bool.TRUE);
-		testBoolValue(false, Bool.FALSE);
+		assertBoolValue(true, Bool.TRUE);
+		assertBoolValue(false, Bool.FALSE);
 		
-		testBoolValue(true, ChurchObjectConverter.fromBoolean(true));
-		testBoolValue(false, ChurchObjectConverter.fromBoolean(false));
+		assertBoolValue(true, ChurchObjectConverter.fromBoolean(true));
+		assertBoolValue(false, ChurchObjectConverter.fromBoolean(false));
 	}
 	
 	@Test
 	void testLogicalAdd() {
-		testBoolValue(true, and(Bool.TRUE, Bool.TRUE));
-		testBoolValue(false, and(Bool.TRUE, Bool.FALSE));
-		testBoolValue(false, and(Bool.FALSE, Bool.TRUE));
-		testBoolValue(false, and(Bool.FALSE, Bool.FALSE));
+		assertBoolValue(true, and(Bool.TRUE, Bool.TRUE));
+		assertBoolValue(false, and(Bool.TRUE, Bool.FALSE));
+		assertBoolValue(false, and(Bool.FALSE, Bool.TRUE));
+		assertBoolValue(false, and(Bool.FALSE, Bool.FALSE));
 	}
 	
 	@Test
 	void testLogicalOr() {
-		testBoolValue(true, or(Bool.TRUE, Bool.TRUE));
-		testBoolValue(true, or(Bool.TRUE, Bool.FALSE));
-		testBoolValue(true, or(Bool.FALSE, Bool.TRUE));
-		testBoolValue(false, or(Bool.FALSE, Bool.FALSE));
+		assertBoolValue(true, or(Bool.TRUE, Bool.TRUE));
+		assertBoolValue(true, or(Bool.TRUE, Bool.FALSE));
+		assertBoolValue(true, or(Bool.FALSE, Bool.TRUE));
+		assertBoolValue(false, or(Bool.FALSE, Bool.FALSE));
 	}
 	
 	@Test
 	void testLogicalNot() {
-		testBoolValue(false, not(Bool.TRUE));
-		testBoolValue(true, not(Bool.FALSE));
+		assertBoolValue(false, not(Bool.TRUE));
+		assertBoolValue(true, not(Bool.FALSE));
 	}
 	
 	@Test
 	void testLogicalXor() {
-		testBoolValue(false, xor(Bool.TRUE, Bool.TRUE));
-		testBoolValue(true, xor(Bool.TRUE, Bool.FALSE));
-		testBoolValue(true, xor(Bool.FALSE, Bool.TRUE));
-		testBoolValue(false, xor(Bool.FALSE, Bool.FALSE));
+		assertBoolValue(false, xor(Bool.TRUE, Bool.TRUE));
+		assertBoolValue(true, xor(Bool.TRUE, Bool.FALSE));
+		assertBoolValue(true, xor(Bool.FALSE, Bool.TRUE));
+		assertBoolValue(false, xor(Bool.FALSE, Bool.FALSE));
 	}
 	
 	private Bool and(Bool b1, Bool b2) {
@@ -64,7 +64,7 @@ class BoolTest {
 		return b1.xor(b2);
 	}
 	
-	static void testBoolValue(boolean expected, Bool bool) {
+	static void assertBoolValue(boolean expected, Bool bool) {
 		Assertions.assertEquals(expected, ChurchObjectConverter.toBoolean(bool));
 	}
 
