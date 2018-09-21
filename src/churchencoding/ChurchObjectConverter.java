@@ -21,4 +21,18 @@ public class ChurchObjectConverter {
 	public static int toInt(NaturalNumber n) {
 		return (Integer) (n.apply(x -> ((Integer) x) + 1).apply(0));
 	}
+	
+	public static WholeNumber fromSignedInt(int n) {
+		if (n > 0) {
+			return WholeNumber.makePositiveNumber(fromInt(n));
+		} else if (n < 0) {
+			return WholeNumber.makeNegativeNumber(fromInt(-n));
+		} else {
+			return WholeNumber.ZERO;
+		}
+	}
+	
+	public static int toSignedInt(WholeNumber n) {
+		return toInt(n.cdr()) * (toBoolean(n.car()) ? 1 : -1);
+	}
 }
