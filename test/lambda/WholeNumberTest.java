@@ -90,6 +90,20 @@ class WholeNumberTest {
 		assertIntValue(-6, fromSignedInt(2).multiply(fromSignedInt(-3)));
 	}
 	
+	@Test
+	void testDivision() {
+		Assertions.assertThrows(ArithmeticException.class, () -> WholeNumber.ZERO.divide(WholeNumber.ZERO));
+		assertIntValue(0, WholeNumber.ZERO.divide(fromSignedInt(2)));
+		Assertions.assertThrows(ArithmeticException.class, () -> fromSignedInt(2).divide(WholeNumber.ZERO));
+		assertIntValue(0, WholeNumber.ZERO.divide(fromSignedInt(-1)));
+		Assertions.assertThrows(ArithmeticException.class, () -> fromSignedInt(-1).divide(WholeNumber.ZERO));
+		assertIntValue(2, fromSignedInt(5).divide(fromSignedInt(2)));
+		assertIntValue(2, fromSignedInt(-7).divide(fromSignedInt(-3)));
+		assertIntValue(-1, fromSignedInt(3).divide(fromSignedInt(-2)));
+		assertIntValue(-2, fromSignedInt(6).divide(fromSignedInt(-3)));
+		assertIntValue(0, fromSignedInt(2).divide(fromSignedInt(-3)));
+	}
+	
 	private static WholeNumber fromSignedInt(int n) {
 		return ChurchObjectConverter.fromSignedInt(n);
 	}

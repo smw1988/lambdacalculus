@@ -46,4 +46,8 @@ public interface WholeNumber extends Tuple<Bool, NaturalNumber> {
 		return makeWholeNumber(this.car().eq(other.car()), this.cdr().multiply(other.cdr()));
 	}
 	
+	default WholeNumber divide(WholeNumber other) {
+		return makeWholeNumber(this.car().eq(other.car()), this.cdr().divide(other.cdr()));
+	}
+	
 }
