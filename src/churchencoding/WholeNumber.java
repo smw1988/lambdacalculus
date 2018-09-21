@@ -32,14 +32,18 @@ public interface WholeNumber extends Tuple<Bool, NaturalNumber> {
 	
 	default WholeNumber add(WholeNumber other) {
 		return ComputeFlow.ifThenElse(this.car().eq(other.car()), 
-				__ -> makeWholeNumberImpl(this.car(), this.cdr().add(other.cdr())), 
+				__ -> makeWholeNumber(this.car(), this.cdr().add(other.cdr())), 
 				__ -> ComputeFlow.ifThenElse(this.cdr().ge(other.cdr()), 
-						___ -> makeWholeNumberImpl(this.car(), this.cdr().subtract(other.cdr())), 
-						___ -> makeWholeNumberImpl(other.car(), other.cdr().subtract(this.cdr()))));
+						___ -> makeWholeNumber(this.car(), this.cdr().subtract(other.cdr())), 
+						___ -> makeWholeNumber(other.car(), other.cdr().subtract(this.cdr()))));
 	}
 	
 	default WholeNumber subtract(WholeNumber other) {
 		return this.add(other.negate());
+	}
+	
+	default WholeNumber multiply(WholeNumber other) {
+		return makeWholeNumber(this.car().eq(other.car()), this.cdr().multiply(other.cdr()));
 	}
 	
 }

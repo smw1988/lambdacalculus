@@ -77,6 +77,19 @@ class WholeNumberTest {
 		assertIntValue(0, fromSignedInt(2).subtract(fromSignedInt(2)));
 	}
 	
+	@Test
+	void testMultiplication() {
+		assertIntValue(0, WholeNumber.ZERO.multiply(WholeNumber.ZERO));
+		assertIntValue(0, WholeNumber.ZERO.multiply(fromSignedInt(2)));
+		assertIntValue(0, fromSignedInt(2).multiply(WholeNumber.ZERO));
+		assertIntValue(0, WholeNumber.ZERO.multiply(fromSignedInt(-1)));
+		assertIntValue(0, fromSignedInt(-1).multiply(WholeNumber.ZERO));
+		assertIntValue(6, fromSignedInt(2).multiply(fromSignedInt(3)));
+		assertIntValue(6, fromSignedInt(-3).multiply(fromSignedInt(-2)));
+		assertIntValue(-6, fromSignedInt(3).multiply(fromSignedInt(-2)));
+		assertIntValue(-6, fromSignedInt(2).multiply(fromSignedInt(-3)));
+	}
+	
 	private static WholeNumber fromSignedInt(int n) {
 		return ChurchObjectConverter.fromSignedInt(n);
 	}
