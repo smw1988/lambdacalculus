@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import churchencoding.ChurchObjectConverter;
+import churchencoding.ComputeFlow;
 import churchencoding.WholeNumber;
 
 class WholeNumberTest {
@@ -21,6 +22,24 @@ class WholeNumberTest {
 	
 	static void assertIntValue(int expected, WholeNumber n) {
 		Assertions.assertEquals(expected, ChurchObjectConverter.toSignedInt(n));
+	}
+	
+	@Test
+	void testIsZero() {
+		ComputeFlow.ifThenElse(
+				WholeNumber.ZERO.isZero(), 
+				__ -> null, 
+				__ -> { Assertions.fail("ZERO should be zero."); return null; });
+		
+		ComputeFlow.ifThenElse(
+				ChurchObjectConverter.fromSignedInt(1).isZero(), 
+				__ -> { Assertions.fail("ONE should not be zero."); return null; }, 
+				__ -> null);
+		
+		ComputeFlow.ifThenElse(
+				ChurchObjectConverter.fromSignedInt(-1).isZero(), 
+				__ -> { Assertions.fail("ONE should not be zero."); return null; }, 
+				__ -> null);
 	}
 
 }
