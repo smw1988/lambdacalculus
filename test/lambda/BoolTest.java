@@ -48,6 +48,14 @@ class BoolTest {
 		assertBoolValue(false, xor(Bool.FALSE, Bool.FALSE));
 	}
 	
+	@Test
+	void testEquality() {
+		assertBoolValue(true, eq(Bool.TRUE, Bool.TRUE));
+		assertBoolValue(false, eq(Bool.TRUE, Bool.FALSE));
+		assertBoolValue(false, eq(Bool.FALSE, Bool.TRUE));
+		assertBoolValue(true, eq(Bool.FALSE, Bool.FALSE));
+	}
+	
 	private Bool and(Bool b1, Bool b2) {
 		return b1.and(b2);
 	}
@@ -62,6 +70,10 @@ class BoolTest {
 	
 	private Bool xor(Bool b1, Bool b2) {
 		return b1.xor(b2);
+	}
+	
+	private Bool eq(Bool b1, Bool b2) {
+		return b1.eq(b2);
 	}
 	
 	static void assertBoolValue(boolean expected, Bool bool) {

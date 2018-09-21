@@ -22,4 +22,8 @@ public interface Bool extends Function<Object, Function<Object, Object>> {
 	default Bool xor(Bool other) {
 		return (Bool) this.apply(other.not()).apply(other);
 	}
+	
+	default Bool eq(Bool other) {
+		return this.xor(other).not();
+	}
 }
