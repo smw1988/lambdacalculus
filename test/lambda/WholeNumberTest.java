@@ -39,6 +39,13 @@ class WholeNumberTest {
 	}
 	
 	@Test
+	void testNegate() {
+		assertIntValue(0, WholeNumber.ZERO.negate());
+		assertIntValue(-2, fromSignedInt(2).negate());
+		assertIntValue(3, fromSignedInt(-3).negate());
+	}
+	
+	@Test
 	void testAddition() {
 		assertIntValue(0, WholeNumber.ZERO.add(WholeNumber.ZERO));
 		assertIntValue(2, WholeNumber.ZERO.add(fromSignedInt(2)));
@@ -52,6 +59,22 @@ class WholeNumberTest {
 		assertIntValue(1, fromSignedInt(-2).add(fromSignedInt(3)));
 		assertIntValue(-1, fromSignedInt(-3).add(fromSignedInt(2)));
 		assertIntValue(0, fromSignedInt(2).add(fromSignedInt(-2)));
+	}
+	
+	@Test
+	void testSubtraction() {
+		assertIntValue(0, WholeNumber.ZERO.subtract(WholeNumber.ZERO));
+		assertIntValue(-2, WholeNumber.ZERO.subtract(fromSignedInt(2)));
+		assertIntValue(2, fromSignedInt(2).subtract(WholeNumber.ZERO));
+		assertIntValue(1, WholeNumber.ZERO.subtract(fromSignedInt(-1)));
+		assertIntValue(-1, fromSignedInt(-1).subtract(WholeNumber.ZERO));
+		assertIntValue(-1, fromSignedInt(2).subtract(fromSignedInt(3)));
+		assertIntValue(-1, fromSignedInt(-3).subtract(fromSignedInt(-2)));
+		assertIntValue(5, fromSignedInt(3).subtract(fromSignedInt(-2)));
+		assertIntValue(5, fromSignedInt(2).subtract(fromSignedInt(-3)));
+		assertIntValue(-5, fromSignedInt(-2).subtract(fromSignedInt(3)));
+		assertIntValue(-5, fromSignedInt(-3).subtract(fromSignedInt(2)));
+		assertIntValue(0, fromSignedInt(2).subtract(fromSignedInt(2)));
 	}
 	
 	private static WholeNumber fromSignedInt(int n) {

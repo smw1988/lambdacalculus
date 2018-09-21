@@ -26,12 +26,20 @@ public interface WholeNumber extends Tuple<Bool, NaturalNumber> {
 				__ -> makeWholeNumberImpl(sign, amplitude));
 	}
 	
+	default WholeNumber negate() {
+		return makeWholeNumber(this.car().not(), this.cdr());
+	}
+	
 	default WholeNumber add(WholeNumber other) {
 		return ComputeFlow.ifThenElse(this.car().eq(other.car()), 
 				__ -> makeWholeNumberImpl(this.car(), this.cdr().add(other.cdr())), 
 				__ -> ComputeFlow.ifThenElse(this.cdr().ge(other.cdr()), 
 						___ -> makeWholeNumberImpl(this.car(), this.cdr().subtract(other.cdr())), 
 						___ -> makeWholeNumberImpl(other.car(), other.cdr().subtract(this.cdr()))));
+	}
+	
+	default WholeNumber subtract(WholeNumber other) {
+		return this.add(other.negate());
 	}
 	
 }
