@@ -1,5 +1,8 @@
 package churchencoding;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChurchObjectConverter {
 
 	public static Bool fromBoolean(boolean b) {
@@ -34,5 +37,21 @@ public class ChurchObjectConverter {
 	
 	public static int toSignedInt(WholeNumber n) {
 		return toInt(n.cdr()) * (toBoolean(n.car()) ? 1 : -1);
+	}
+	
+	public static <T> List<T> toList(ListNode<T> list) {
+		if (toBoolean(list.isNil()))
+			return new ArrayList<T>();
+		else {
+			List<T> resultList = toList(list.cdr());
+			resultList.add(0, list.car());
+			return resultList;
+		}
+	}
+	
+	public static <T> ListNode<T> fromList(List<T> list) {
+		return list.isEmpty() 
+				? ListNode.makeEmptList()
+				: fromList(list.subList(1, list.size())).append(list.get(0));
 	}
 }
