@@ -1,0 +1,36 @@
+-- special forms:
+(define <varname> <expression>)
+: define varname to be some value in the current environment
+
+(lambda (<parameter name list>) <expression list>)
+: return the value of the last expression list, or nil
+
+(package <name>)
+: directive that indicates following code should be defined in the package
+
+(<func> <args list>)
+: apply function to list of arguments
+: if argumetn list is not enough, return higher order function resulting from partial application/currying
+
+(bind <func> _ <expression>)
+: bind particular arguments to expression, creating higher order function
+: _ is placeholder for unbonud argument
+
+(chain <func list>)
+: ((chain a b) x) is (a (b x))
+
+(chain-seq <func list>)
+: ((chain-sqe a b) x) is (b (a x))
+
+-- standard library
+(make-tuple <e1> <e2>)
+: make a 2-tuple
+
+nil
+: constant for nil
+
+(make-list <value list>)
+integer operations, add, subtract, multiple, equality, less than
+
+(print <value>)
+: prints the string value
